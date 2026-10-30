@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Meet Bluefield Studio and explore thoughtful brand, design, and digital work.">
+	<title>Bluefield Studio | Welcome</title>
+	<style>
+		:root {
+			--blue: #155bd5;
+			--blue-dark: #103e91;
+			--ink: #162941;
+			--muted: #607188;
+			--white: #fff;
+			--mist: #f1f6fc;
+			--line: #dce6f1;
+			--coral: #f07862;
+		}
+
+		* { box-sizing: border-box; }
+		body {
+			min-height: 100vh;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			background: var(--white);
+			color: var(--ink);
+			font-family: "Trebuchet MS", Arial, sans-serif;
+		}
+
+		a { color: inherit; }
+		.site-header {
+			position: sticky;
+			z-index: 5;
+			top: 0;
+			display: flex;
+			min-height: 76px;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 clamp(22px, 7vw, 96px);
+			border-bottom: 1px solid var(--line);
+			background: var(--white);
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			color: var(--ink);
+			font-size: 17px;
+			font-weight: 800;
+			letter-spacing: 1px;
+			text-decoration: none;
+		}
+
+		.brand-mark {
+			display: grid;
+			width: 32px;
+			height: 32px;
+			place-items: center;
+			border-radius: 50%;
+			background: var(--blue);
+			color: var(--white);
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 19px;
+		}
+
+		.nav-links { display: flex; align-items: center; gap: 38px; }
+		.nav-links a {
+			color: #40536a;
+			font-size: 14px;
+			font-weight: 700;
+			text-decoration: none;
+		}
+
+		.nav-links a:hover,
+		.nav-links a:focus-visible,
+		.nav-links a[aria-current="page"] {
+			color: var(--blue);
+			text-decoration: underline;
+			text-underline-offset: 5px;
+		}
+
+		.menu-toggle {
+			display: none;
+			width: 42px;
+			height: 42px;
+			border: 1px solid var(--line);
+			border-radius: 4px;
+			background: var(--white);
+			color: var(--blue-dark);
+			font-size: 22px;
+			cursor: pointer;
+		}
+
+		main { flex: 1; }
+		.hero {
+			position: relative;
+			display: flex;
+			min-height: min(680px, calc(100vh - 76px));
+			align-items: center;
+			overflow: hidden;
+			background: var(--blue-dark) url("https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2200&q=85") center 52% / cover;
+			color: var(--white);
+		}
+
+		.hero::before {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(90deg, rgba(13, 53, 132, 0.88), rgba(13, 53, 132, 0.32));
+			content: "";
+		}
+
+		.hero-content {
+			position: relative;
+			width: min(100% - 44px, 1120px);
+			margin: 0 auto;
+			padding: 84px 0;
+			animation: enter 600ms ease-out both;
+		}
+
+		.eyebrow {
+			margin: 0 0 20px;
+			color: #d8e7ff;
+			font-size: 12px;
+			font-weight: 800;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+		}
+
+		h1, h2 { text-wrap: balance; }
+		h1 {
+			max-width: 760px;
+			margin: 0;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(48px, 7vw, 86px);
+			font-weight: 400;
+			line-height: 1.03;
+		}
+
+		.hero-copy {
+			max-width: 520px;
+			margin: 24px 0 32px;
+			color: #e4edff;
+			font-size: 17px;
+			line-height: 1.7;
+		}
+
+		.button-link {
+			display: inline-flex;
+			min-height: 48px;
+			align-items: center;
+			justify-content: center;
+			padding: 0 22px;
+			border-radius: 3px;
+			background: var(--white);
+			color: var(--blue-dark);
+			font-size: 14px;
+			font-weight: 800;
+			text-decoration: none;
+			transition: transform 160ms ease, background-color 160ms ease;
+		}
+
+		.button-link:hover { transform: translateY(-2px); background: #e9f1ff; }
+		.intro {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			align-items: center;
+			gap: 48px;
+			width: min(100% - 44px, 1120px);
+			margin: 0 auto;
+			padding: 62px 0 68px;
+		}
+
+		.intro .eyebrow { margin-bottom: 14px; color: var(--blue); }
+		.intro h2 {
+			max-width: 580px;
+			margin: 0;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(32px, 4vw, 46px);
+			font-weight: 400;
+			line-height: 1.12;
+		}
+
+		.intro-copy { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+		.site-footer {
+			display: flex;
+			min-height: 82px;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			padding: 20px clamp(22px, 7vw, 96px);
+			background: var(--blue-dark);
+			color: var(--white);
+			font-size: 13px;
+		}
+
+		.site-footer p { margin: 0; color: #dbe7fa; }
+		@keyframes enter {
+			from { opacity: 0; transform: translateY(15px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		@media (max-width: 720px) {
+			.site-header { min-height: 68px; }
+			.menu-toggle { display: grid; place-items: center; }
+			.nav-links {
+				position: absolute;
+				top: 67px;
+				right: 0;
+				left: 0;
+				display: none;
+				align-items: stretch;
+				gap: 0;
+				padding: 8px 22px 16px;
+				border-bottom: 1px solid var(--line);
+				background: var(--white);
+			}
+			.nav-links.is-open { display: flex; flex-direction: column; }
+			.nav-links a { padding: 14px 0; }
+			.hero { min-height: 590px; }
+			.intro { grid-template-columns: 1fr; gap: 20px; padding: 52px 0 58px; }
+			.site-footer { align-items: flex-start; flex-direction: column; justify-content: center; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<a class="brand" href="homepage.html"><span class="brand-mark" aria-hidden="true">B</span> BLUEFIELD</a>
+		<button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+		<nav class="nav-links" id="main-nav" aria-label="Main navigation">
+			<a href="homepage.html" aria-current="page">Home</a>
+			<a href="servicespage.html">Services</a>
+			<a href="blogspage.html">Blogs</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero" aria-labelledby="hero-title">
+			<div class="hero-content">
+				<p class="eyebrow">Ideas made clear</p>
+				<h1 id="hero-title">Build a brand people believe in.</h1>
+				<p class="hero-copy">We pair thoughtful strategy with confident design to help ambitious teams make their next move.</p>
+				<a class="button-link" href="servicespage.html">Explore our services</a>
+			</div>
+		</section>
+
+		<section class="intro" aria-labelledby="intro-title">
+			<div>
+				<p class="eyebrow">Bluefield Studio</p>
+				<h2 id="intro-title">Good thinking. Clear direction.</h2>
+			</div>
+			<p class="intro-copy">From the first question to the final details, we make the complex feel simple and the important stand out. Find practical ideas on our blog, or see how we can help shape what comes next.</p>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<a class="brand" href="homepage.html">BLUEFIELD</a>
+		<p>Clear ideas. Thoughtful design. © 2026 Bluefield Studio</p>
+	</footer>
+
+	<script>
+		const menuToggle = document.querySelector(".menu-toggle");
+		const mainNav = document.querySelector("#main-nav");
+
+		menuToggle.addEventListener("click", () => {
+			const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+			menuToggle.setAttribute("aria-expanded", String(!isOpen));
+			menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+			mainNav.classList.toggle("is-open", !isOpen);
+		});
+
+		mainNav.addEventListener("click", (event) => {
+			if (event.target.closest("a")) {
+				menuToggle.setAttribute("aria-expanded", "false");
+				menuToggle.setAttribute("aria-label", "Open navigation menu");
+				mainNav.classList.remove("is-open");
+			}
+		});
+	</script>
+</body>
+</html>
