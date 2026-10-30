@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Ideas, practical advice, and studio notes from Bluefield Studio.">
+	<title>Bluefield Studio | Blogs</title>
+	<style>
+		:root {
+			--blue: #155bd5;
+			--blue-dark: #103e91;
+			--ink: #162941;
+			--muted: #607188;
+			--white: #fff;
+			--mist: #f1f6fc;
+			--line: #dce6f1;
+		}
+
+		* { box-sizing: border-box; }
+		body {
+			min-height: 100vh;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			background: var(--white);
+			color: var(--ink);
+			font-family: "Trebuchet MS", Arial, sans-serif;
+		}
+
+		a { color: inherit; }
+		.site-header {
+			position: sticky;
+			z-index: 5;
+			top: 0;
+			display: flex;
+			min-height: 76px;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 clamp(22px, 7vw, 96px);
+			border-bottom: 1px solid var(--line);
+			background: var(--white);
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			color: var(--ink);
+			font-size: 17px;
+			font-weight: 800;
+			letter-spacing: 1px;
+			text-decoration: none;
+		}
+
+		.brand-mark {
+			display: grid;
+			width: 32px;
+			height: 32px;
+			place-items: center;
+			border-radius: 50%;
+			background: var(--blue);
+			color: var(--white);
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 19px;
+		}
+
+		.nav-links { display: flex; align-items: center; gap: 38px; }
+		.nav-links a {
+			color: #40536a;
+			font-size: 14px;
+			font-weight: 700;
+			text-decoration: none;
+		}
+
+		.nav-links a:hover,
+		.nav-links a:focus-visible,
+		.nav-links a[aria-current="page"] {
+			color: var(--blue);
+			text-decoration: underline;
+			text-underline-offset: 5px;
+		}
+
+		.menu-toggle {
+			display: none;
+			width: 42px;
+			height: 42px;
+			border: 1px solid var(--line);
+			border-radius: 4px;
+			background: var(--white);
+			color: var(--blue-dark);
+			font-size: 22px;
+			cursor: pointer;
+		}
+
+		main { flex: 1; }
+		.page-hero {
+			padding: 70px 22px 74px;
+			background: var(--blue-dark);
+			color: var(--white);
+		}
+
+		.hero-inner, .content-inner { width: min(100%, 1120px); margin: 0 auto; }
+		.eyebrow {
+			margin: 0 0 17px;
+			color: #bcd3ff;
+			font-size: 12px;
+			font-weight: 800;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+		}
+
+		h1, h2, h3 { text-wrap: balance; }
+		.page-hero h1 {
+			max-width: 760px;
+			margin: 0;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(44px, 7vw, 72px);
+			font-weight: 400;
+			line-height: 1.04;
+		}
+
+		.hero-copy {
+			max-width: 540px;
+			margin: 18px 0 0;
+			color: #e0ebff;
+			font-size: 16px;
+			line-height: 1.7;
+		}
+
+		.featured {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 42px;
+			align-items: center;
+			padding: 58px 0 64px;
+			border-bottom: 1px solid var(--line);
+		}
+
+		.featured img {
+			display: block;
+			width: 100%;
+			aspect-ratio: 1.35;
+			object-fit: cover;
+			background: var(--mist);
+		}
+
+		.article-meta {
+			margin: 0 0 13px;
+			color: var(--blue);
+			font-size: 11px;
+			font-weight: 800;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+
+		.featured h2 {
+			margin: 0;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(30px, 4vw, 44px);
+			font-weight: 400;
+			line-height: 1.13;
+		}
+
+		.featured-copy {
+			margin: 16px 0 22px;
+			color: var(--muted);
+			font-size: 15px;
+			line-height: 1.7;
+		}
+
+		.read-time { color: var(--muted); font-size: 13px; }
+
+		.latest { padding: 70px 0 88px; }
+		.latest-heading {
+			display: flex;
+			align-items: end;
+			justify-content: space-between;
+			gap: 24px;
+			margin-bottom: 28px;
+		}
+
+		.latest-heading .eyebrow { margin-bottom: 10px; color: var(--blue); }
+		.latest-heading h2 {
+			margin: 0;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(32px, 4vw, 44px);
+			font-weight: 400;
+		}
+
+		.search-wrap { width: min(100%, 300px); }
+		.search-wrap label { display: block; margin-bottom: 7px; color: var(--muted); font-size: 12px; font-weight: 700; }
+		.search-wrap input {
+			width: 100%;
+			min-height: 42px;
+			padding: 9px 12px;
+			border: 1px solid #b8c8dc;
+			border-radius: 3px;
+			background: var(--white);
+			color: var(--ink);
+			font: inherit;
+		}
+
+		.search-wrap input:focus { border-color: var(--blue); outline: 3px solid #d9e7ff; }
+		.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+		.filter-button {
+			min-height: 36px;
+			padding: 0 14px;
+			border: 1px solid var(--line);
+			border-radius: 20px;
+			background: var(--white);
+			color: #40536a;
+			font: inherit;
+			font-size: 13px;
+			cursor: pointer;
+		}
+
+		.filter-button:hover, .filter-button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue); color: var(--white); }
+		.results-count { min-height: 20px; margin: 0 0 16px; color: var(--muted); font-size: 13px; }
+		.article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 24px; }
+		.article-card[hidden] { display: none; }
+		.article-card img { display: block; width: 100%; aspect-ratio: 1.45; object-fit: cover; background: var(--mist); }
+		.article-card h3 { margin: 0; font: 400 23px/1.25 Georgia, "Times New Roman", serif; }
+		.article-card > p:last-child { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+		.empty-state { display: none; padding: 30px 0; color: var(--muted); }
+		.empty-state.is-visible { display: block; }
+
+		.site-footer {
+			display: flex;
+			min-height: 82px;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			padding: 20px clamp(22px, 7vw, 96px);
+			background: #0d3275;
+			color: var(--white);
+			font-size: 13px;
+		}
+
+		.site-footer p { margin: 0; color: #d8e5fb; }
+		.site-footer a { color: var(--white); text-decoration: none; }
+		.site-footer a:hover { text-decoration: underline; }
+
+		@media (max-width: 760px) {
+			.site-header { min-height: 68px; }
+			.menu-toggle { display: grid; place-items: center; }
+			.nav-links {
+				position: absolute;
+				top: 67px;
+				right: 0;
+				left: 0;
+				display: none;
+				align-items: stretch;
+				gap: 0;
+				padding: 8px 22px 16px;
+				border-bottom: 1px solid var(--line);
+				background: var(--white);
+			}
+			.nav-links.is-open { display: flex; flex-direction: column; }
+			.nav-links a { padding: 14px 0; }
+			.page-hero { padding: 58px 22px 62px; }
+			.featured { grid-template-columns: 1fr; gap: 24px; padding: 38px 0 44px; }
+			.featured img { order: -1; }
+			.latest { padding: 54px 0 68px; }
+			.latest-heading { align-items: stretch; flex-direction: column; }
+			.search-wrap { width: 100%; }
+			.article-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+			.site-footer { align-items: flex-start; flex-direction: column; justify-content: center; }
+		}
+
+		@media (max-width: 480px) {
+			.article-grid { grid-template-columns: 1fr; }
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<a class="brand" href="homepage.html#home"><span class="brand-mark" aria-hidden="true">B</span> BLUEFIELD</a>
+		<button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+		<nav class="nav-links" id="main-nav" aria-label="Main navigation">
+			<a href="homepage.html#home">Home</a>
+			<a href="servicespage.html">Services</a>
+			<a href="blogspage.html" aria-current="page">Blogs</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="page-hero">
+			<div class="hero-inner">
+				<p class="eyebrow">The Bluefield journal</p>
+				<h1>Ideas for making your next move.</h1>
+				<p class="hero-copy">Practical notes on building meaningful brands, doing thoughtful work, and making digital feel a little more human.</p>
+			</div>
+		</section>
+
+		<div class="content-inner">
+			<article class="featured">
+				<img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=85" alt="Notebook and pen ready for a first draft" fetchpriority="high">
+				<div>
+					<p class="article-meta">Featured · Creative process</p>
+					<h2>Why every good idea needs a first draft</h2>
+					<p class="featured-copy">The most useful work rarely starts out polished. A first draft gives a team something real to question, shape, and improve.</p>
+					<span class="read-time">5 minute read</span>
+				</div>
+			</article>
+
+			<section class="latest" aria-labelledby="latest-title">
+				<div class="latest-heading">
+					<div>
+						<p class="eyebrow">Explore the journal</p>
+						<h2 id="latest-title">Latest articles</h2>
+					</div>
+					<div class="search-wrap">
+						<label for="article-search">Search articles</label>
+						<input id="article-search" type="search" placeholder="Try “design” or “process”">
+					</div>
+				</div>
+
+				<div class="filters" role="group" aria-label="Filter articles by category">
+					<button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
+					<button class="filter-button" type="button" data-filter="strategy" aria-pressed="false">Strategy</button>
+					<button class="filter-button" type="button" data-filter="design" aria-pressed="false">Design</button>
+					<button class="filter-button" type="button" data-filter="process" aria-pressed="false">Process</button>
+				</div>
+
+				<p class="results-count" id="results-count" role="status" aria-live="polite"></p>
+				<div class="article-grid" id="article-grid">
+					<article class="article-card" data-category="strategy">
+						<img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=900&q=80" alt="Sunlit workspace with plants and books" loading="lazy">
+						<p class="article-meta">Strategy · 4 min read</p>
+						<h3>A calmer way to begin your next project</h3>
+						<p>Three questions to help a team find focus before the busy work begins.</p>
+					</article>
+					<article class="article-card" data-category="design">
+						<img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=900&q=80" alt="Creative team sharing ideas around a table" loading="lazy">
+						<p class="article-meta">Design · 6 min read</p>
+						<h3>Start with better questions</h3>
+						<p>Curiosity helps uncover the details that make a brand feel like itself.</p>
+					</article>
+					<article class="article-card" data-category="process">
+						<img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80" alt="Handwritten notes in a notebook" loading="lazy">
+						<p class="article-meta">Process · 5 min read</p>
+						<h3>Make room for the rough draft</h3>
+						<p>Why getting an early version on the page can make the final work stronger.</p>
+					</article>
+					<article class="article-card" data-category="design">
+						<img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Bright, shared creative studio" loading="lazy">
+						<p class="article-meta">Design · 7 min read</p>
+						<h3>Build a visual identity that can grow</h3>
+						<p>A flexible design system can stay recognizable while making room for change.</p>
+					</article>
+					<article class="article-card" data-category="strategy">
+						<img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80" alt="Team reviewing project notes together" loading="lazy">
+						<p class="article-meta">Strategy · 3 min read</p>
+						<h3>Clarity is a competitive advantage</h3>
+						<p>When your message is easy to understand, it is easier for the right people to act.</p>
+					</article>
+					<article class="article-card" data-category="process">
+						<img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80" alt="Collaborative team workspace" loading="lazy">
+						<p class="article-meta">Process · 5 min read</p>
+						<h3>Small rituals for better collaboration</h3>
+						<p>Simple habits that help teams share context, make decisions, and keep momentum.</p>
+					</article>
+				</div>
+				<p class="empty-state" id="empty-state">No articles match your search. Try another word or category.</p>
+			</section>
+		</div>
+	</main>
+
+	<footer class="site-footer">
+		<a class="brand" href="homepage.html#home">BLUEFIELD</a>
+		<p>Clear ideas. Thoughtful design. © 2026 Bluefield Studio</p>
+	</footer>
+
+	<script>
+		const menuToggle = document.querySelector(".menu-toggle");
+		const mainNav = document.querySelector("#main-nav");
+		const searchInput = document.querySelector("#article-search");
+		const filterButtons = document.querySelectorAll(".filter-button");
+		const articleCards = document.querySelectorAll(".article-card");
+		const resultsCount = document.querySelector("#results-count");
+		const emptyState = document.querySelector("#empty-state");
+		let activeFilter = "all";
+
+		menuToggle.addEventListener("click", () => {
+			const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+			menuToggle.setAttribute("aria-expanded", String(!isOpen));
+			menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+			mainNav.classList.toggle("is-open", !isOpen);
+		});
+
+		mainNav.addEventListener("click", (event) => {
+			if (event.target.closest("a")) {
+				menuToggle.setAttribute("aria-expanded", "false");
+				menuToggle.setAttribute("aria-label", "Open navigation menu");
+				mainNav.classList.remove("is-open");
+			}
+		});
+
+		function updateArticles() {
+			const searchTerm = searchInput.value.trim().toLowerCase();
+			let visibleCount = 0;
+
+			articleCards.forEach((card) => {
+				const matchesCategory = activeFilter === "all" || card.dataset.category === activeFilter;
+				const matchesSearch = card.textContent.toLowerCase().includes(searchTerm);
+				const isVisible = matchesCategory && matchesSearch;
+				card.hidden = !isVisible;
+				if (isVisible) visibleCount += 1;
+			});
+
+			resultsCount.textContent = `${visibleCount} ${visibleCount === 1 ? "article" : "articles"}`;
+			emptyState.classList.toggle("is-visible", visibleCount === 0);
+		}
+
+		filterButtons.forEach((button) => {
+			button.addEventListener("click", () => {
+				activeFilter = button.dataset.filter;
+				filterButtons.forEach((filterButton) => {
+					filterButton.setAttribute("aria-pressed", String(filterButton === button));
+				});
+				updateArticles();
+			});
+		});
+
+		searchInput.addEventListener("input", updateArticles);
+		updateArticles();
+	</script>
+</body>
+</html>
